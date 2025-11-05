@@ -2,17 +2,14 @@ import os
 from crewai import Agent, Task, Crew, Process
 from langchain_openai import ChatOpenAI
 from crewai.tools import tool
+# Import the real tool
+from crewai_tools import SerperDevTool
+
+# Initialize the real tool
+restaurant_search_tool = SerperDevTool()
 
 # --- Configuration ---
 llm = ChatOpenAI(model="gpt-4.1-mini")
-
-# --- Tools ---
-@tool("Restaurant Search Tool")
-def restaurant_search_tool(query: str) -> str:
-    """Simulates a search for restaurants based on a query.
-    The query should contain cuisine, location, and price range.
-    """
-    return f"Simulated search for: {query}. The agent should now use its knowledge to provide a detailed, realistic list of 3-5 top-rated restaurants matching this criteria, including their name, cuisine, rating, and a brief description."
 
 # --- Agents ---
 researcher = Agent(
