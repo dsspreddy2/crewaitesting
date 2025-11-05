@@ -428,9 +428,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 For issues, questions, or suggestions:
 
 1. Check the [FAQ](#faq) section above
-2. Review the [AWS_EC2_Deployment_Guide.md](AWS_EC2_Deployment_Guide.md) for deployment issues
-3. Check the [SPEAKER_NOTES.md](SPEAKER_NOTES.md) for presentation questions
-4. Open an issue on GitHub
+2. Open an issue on GitHub
 
 ## 🙏 Acknowledgments
 
@@ -454,6 +452,6 @@ For issues, questions, or suggestions:
 
 **Last Updated:** November 2025
 
-**Author:** [Your Name/Team]
+**Author:** Siva satya prasad reddy 
 
 **Repository:** [https://github.com/dsspreddy2/crewaitesting](https://github.com/dsspreddy2/crewaitesting)
