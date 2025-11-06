@@ -8,16 +8,17 @@ The **CrewAI Restaurant Recommender** showcases how specialized AI agents can co
 
 ### Key Features
 
-- **Multi-Agent Architecture:** Three specialized agents collaborate sequentially, each focusing on a specific task
+- **Multi-Agent Architecture:** Specialized agents collaborate sequentially, each focusing on a specific task
 - **Transparent Process:** Real-time logging shows exactly how each agent works and why decisions are made
 - **Cost-Efficient:** Uses `gpt-4.1-mini` model, costing less than $0.005 per recommendation
 - **Production-Ready:** Deployed on AWS EC2 with security best practices
 - **User-Friendly Interface:** Simple Streamlit UI for non-technical users
 - **Fully Open Source:** Complete code, documentation, and deployment guides included
+- **Weather-Aware Recommendations:** Optional weather briefing helps diners plan for outdoor seating and travel comfort
 
 ## 🏗️ Architecture
 
-### The Three-Agent System
+### The Multi-Agent System
 
 #### 1. **Restaurant Researcher Agent**
 - **Role:** Data Collector
@@ -31,7 +32,13 @@ The **CrewAI Restaurant Recommender** showcases how specialized AI agents can co
 - **Output:** Detailed analysis with final recommendation and reasoning
 - **Decision:** Identifies the single best restaurant that matches user criteria
 
-#### 3. **Recommendation Generator Agent**
+#### 3. **Weather & Ambience Advisor** *(optional)*
+- **Role:** Forecast Specialist
+- **Responsibility:** Provides a concise, up-to-date weather briefing for the dining location
+- **Output:** Temperature, precipitation expectations, and comfort notes (e.g., patio readiness)
+- **Tools:** Dining Weather Lookup (powered by Open-Meteo public APIs)
+
+#### 4. **Recommendation Generator Agent**
 - **Role:** Concierge
 - **Responsibility:** Crafts the final, personalized recommendation with engaging copy
 - **Output:** Professional, persuasive recommendation ready for the user
@@ -43,6 +50,8 @@ The **CrewAI Restaurant Recommender** showcases how specialized AI agents can co
 User Input
     ↓
 Researcher Agent (Find Options)
+    ↓
+Weather & Ambience Advisor (Assess Conditions)
     ↓
 Analyst Agent (Evaluate & Decide)
     ↓
@@ -108,8 +117,9 @@ The application will open in your browser at `http://localhost:8501`
 
 1. Enter your dining preferences in the text box (e.g., "A vegan-friendly restaurant in San Francisco with a view")
 2. Click "Get Recommendation"
-3. Watch the agents collaborate in real-time
-4. View the personalized recommendation
+3. Toggle "Include current weather insights" if you want a live weather briefing
+4. Watch the agents collaborate in real-time
+5. View the personalized recommendation (with weather notes when enabled)
 
 ## 📁 Project Structure
 
@@ -134,7 +144,7 @@ crewaitesting/
 | File | Purpose |
 | :--- | :--- |
 | `app.py` | Streamlit application that provides the user interface |
-| `crew.py` | Defines the three agents, their tasks, and the CrewAI workflow |
+| `crew.py` | Defines the agents (research, weather, analysis, recommendation), their tasks, and the CrewAI workflow |
 | `requirements.txt` | Lists all Python dependencies (CrewAI, Streamlit, OpenAI, etc.) |
 | `.gitignore` | Prevents sensitive files (.env, API keys, logs) from being committed |
 | `AWS_EC2_Deployment_Guide.md` | Step-by-step guide for deploying on AWS EC2 |

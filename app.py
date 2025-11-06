@@ -12,9 +12,10 @@ st.set_page_config(
 # --- Header and Description ---
 st.title("🍽️ CrewAI Restaurant Recommender")
 st.markdown("""
-Welcome to the **CrewAI Restaurant Recommender** demo! 
-This application uses a multi-agent system built with **CrewAI** to provide personalized restaurant recommendations. 
+Welcome to the **CrewAI Restaurant Recommender** demo!
+This application uses a multi-agent system built with **CrewAI** to provide personalized restaurant recommendations.
 The agents collaborate to research, analyze, and generate a final, tailored suggestion based on your preferences.
+You can also request a live weather briefing for the dining location so you know whether outdoor seating is a good idea.
 
 This demo is designed to be run on an AWS EC2 instance and uses the pre-configured **OpenAI API** (via `gpt-4.1-mini`) for a cost-effective demonstration.
 """)
@@ -25,12 +26,19 @@ with st.sidebar:
     st.markdown("""
     1. **Restaurant Researcher:** Gathers initial data on 3-5 top-rated restaurants based on your input.
     2. **Cuisine Analyst:** Analyzes the list, focusing on ratings, trends, and unique features.
-    3. **Recommendation Generator:** Synthesizes the analysis into a final, personalized recommendation.
-    
+    3. **Weather Advisor (optional):** Summarizes the current weather to help you plan for patio seating, attire, or travel.
+    4. **Recommendation Generator:** Synthesizes the analysis into a final, personalized recommendation.
+
     The process is sequential, and the agents delegate tasks to each other. The detailed collaboration log will be visible in the terminal where the Streamlit app is running.
     """)
-    
+
     st.info("Example Preference: 'A romantic, high-end French restaurant in New York City with a 5-star rating.'")
+
+    include_weather = st.checkbox(
+        "Include current weather insights",
+        value=True,
+        help="Adds a weather specialist agent that provides a quick briefing for the dining location."
+    )
 
 # --- Main Application Logic ---
 
@@ -50,7 +58,7 @@ if st.button("Get Recommendation", type="primary"):
         with st.spinner("Agents are collaborating to find your perfect restaurant... (Check terminal for verbose log)"):
             try:
                 # Run the CrewAI process
-                final_recommendation = run_crew(user_preference)
+                final_recommendation = run_crew(user_preference, include_weather=include_weather)
                 
                 # Display the result
                 st.success("Recommendation Complete!")
